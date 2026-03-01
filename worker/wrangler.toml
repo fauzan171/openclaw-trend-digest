@@ -24,7 +24,7 @@ crons = ["0 23 * * *"]
 [[d1_databases]]
 binding = "DB"
 database_name = "openclaw-digest-db"
-database_id = "YOUR_DATABASE_ID_HERE"    # ← Ganti setelah `npm run db:create`
+database_id = "ccfac301-99c4-4cac-9a32-2cd515b8a09b"    # ← Ganti setelah `npm run db:create`
 
 # ===== Environment Variables (non-secret) =====
 [vars]
