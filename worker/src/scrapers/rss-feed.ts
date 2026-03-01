@@ -12,12 +12,16 @@ import type { RawArticle, ScraperResult } from '../types/index.js';
 import type { Logger } from '../utils/logger.js';
 
 const RSS_FEEDS: Array<{ name: string; url: string; category?: string }> = [
-  { name: 'Kompas Nasional', url: 'https://sindikasi.kompas.com/xml/nasional', category: 'Local' },
-  { name: 'Kompas Edukasi', url: 'https://sindikasi.kompas.com/xml/edukasi', category: 'Education' },
-  { name: 'Tempo Nasional', url: 'https://rss.tempo.co/nasional', category: 'Politics' },
-  { name: 'Antara News', url: 'https://www.antaranews.com/rss/nasional.xml', category: 'Local' },
-  { name: 'Detik Edukasi', url: 'https://lapi.detik.com/api/kanal/edukasi', category: 'Education' }, // Not strictly RSS but detiks often use rss endpoints or similar, will use antaranews instead for safety
-  { name: 'Republika Pendidikan', url: 'https://www.republika.co.id/rss/pendidikan', category: 'Education' },
+  // Twitter / Viral Trends Indonesia
+  { name: 'Twitter Trends ID', url: 'https://news.google.com/rss/search?q=twitter+indonesia+viral+OR+trending&hl=id&gl=ID&ceid=ID:id', category: 'Twitter Trends' },
+  // Underground/Hacking/Cybersecurity news
+  { name: 'BleepingComputer', url: 'https://www.bleepingcomputer.com/feed/', category: 'Underground/Security' },
+  { name: 'The Hacker News', url: 'https://feeds.feedburner.com/TheHackersNews', category: 'Underground/Security' },
+  // AI Trends
+  { name: 'AI News', url: 'https://artificialintelligence-news.com/feed/', category: 'AI Trends' },
+  // Football/Soccer
+  { name: 'Goal Indonesia', url: 'https://www.goal.com/feeds/id/news', category: 'Football' },
+  { name: 'SkySports Football', url: 'https://www.skysports.com/rss/12040', category: 'Football' },
 ];
 
 /**

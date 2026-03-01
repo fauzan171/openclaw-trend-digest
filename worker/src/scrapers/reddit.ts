@@ -6,7 +6,7 @@
 import type { RawArticle, ScraperResult } from '../types/index.js';
 import type { Logger } from '../utils/logger.js';
 
-const SUBREDDITS = ['indonesia', 'finansial', 'jakarta', 'pedulilindungi'];
+const SUBREDDITS = ['indonesia', 'indowibu', 'ArtificialInteligence', 'soccer', 'MachineLearning', 'hacking'];
 const REDDIT_BASE_URL = 'https://www.reddit.com';
 const MAX_POSTS_PER_SUB = 15;
 

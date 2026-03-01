@@ -28,7 +28,7 @@ database_id = "ccfac301-99c4-4cac-9a32-2cd515b8a09b"    # ← Ganti setelah `npm
 
 # ===== Environment Variables (non-secret) =====
 [vars]
-MAX_TOPICS = "7"
+MAX_TOPICS = "15"
 MIN_RELEVANCE_SCORE = "5"
 LOG_LEVEL = "info"
 ENVIRONMENT = "production"
