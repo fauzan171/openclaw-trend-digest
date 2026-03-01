@@ -101,7 +101,12 @@ export async function runAICuration(
   const minRelevance = parseInt(env.MIN_RELEVANCE_SCORE ?? '5', 10);
 
   const systemPrompt = buildSystemPrompt(maxTopics, minRelevance);
-  const userMessage = formatRawDataForAI(articles);
+
+  // Mencegah melebihi batas limit Groq API (Free Tier = 6000 TPM)
+  // ~170 artikel menghasilkan ~12500 token. Memotong menjadi 60 artikel
+  // akan menghasilkan ~4500 token, menjaga penggunaan di bawah batas aman.
+  const limitedArticles = articles.slice(0, 60);
+  const userMessage = formatRawDataForAI(limitedArticles);
 
   logger.info('AI', `Prompt: ${systemPrompt.length} chars | Data: ${userMessage.length} chars (~${Math.ceil(userMessage.length / 4)} tokens)`);
 
