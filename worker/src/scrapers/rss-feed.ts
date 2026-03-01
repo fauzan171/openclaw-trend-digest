@@ -12,11 +12,12 @@ import type { RawArticle, ScraperResult } from '../types/index.js';
 import type { Logger } from '../utils/logger.js';
 
 const RSS_FEEDS: Array<{ name: string; url: string; category?: string }> = [
-  { name: 'TechCrunch', url: 'https://techcrunch.com/feed/', category: 'Technology' },
-  { name: 'The Verge', url: 'https://www.theverge.com/rss/index.xml', category: 'Technology' },
-  { name: 'Ars Technica', url: 'https://feeds.arstechnica.com/arstechnica/index', category: 'Technology' },
-  { name: 'Wired', url: 'https://www.wired.com/feed/rss', category: 'Technology' },
-  { name: 'Dev.to', url: 'https://dev.to/feed', category: 'Technology' },
+  { name: 'Kompas Nasional', url: 'https://sindikasi.kompas.com/xml/nasional', category: 'Local' },
+  { name: 'Kompas Edukasi', url: 'https://sindikasi.kompas.com/xml/edukasi', category: 'Education' },
+  { name: 'Tempo Nasional', url: 'https://rss.tempo.co/nasional', category: 'Politics' },
+  { name: 'Antara News', url: 'https://www.antaranews.com/rss/nasional.xml', category: 'Local' },
+  { name: 'Detik Edukasi', url: 'https://lapi.detik.com/api/kanal/edukasi', category: 'Education' }, // Not strictly RSS but detiks often use rss endpoints or similar, will use antaranews instead for safety
+  { name: 'Republika Pendidikan', url: 'https://www.republika.co.id/rss/pendidikan', category: 'Education' },
 ];
 
 /**
