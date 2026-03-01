@@ -1,0 +1,33 @@
+# ============================================
+# OpenClaw Trend Digest — Docker Compose
+# Tim 5: DevOps & Automation Team
+# ============================================
+#
+# Untuk self-hosting:
+#   1. Copy .env.example → .env dan isi nilainya
+#   2. docker compose up -d
+#   3. Selesai! Bot akan jalan setiap hari.
+#
+# Untuk menjalankan sekali (testing):
+#   docker compose run --rm digest
+# ============================================
+
+services:
+  digest:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: openclaw-digest
+    env_file:
+      - .env
+    restart: "no"
+    # Resource limits (bot ini ringan, tidak perlu banyak)
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+          cpus: "0.5"
+    # Labels untuk monitoring
+    labels:
+      - "app=openclaw-trend-digest"
+      - "team=openclaw"

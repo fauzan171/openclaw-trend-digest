@@ -1,0 +1,39 @@
+# Dependencies
+node_modules/
+frontend/node_modules/
+worker/node_modules/
+
+# Build output
+dist/
+frontend/.next/
+frontend/out/
+
+# Environment
+.env
+.env.local
+.env.*.local
+.dev.vars
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+
+# Coverage
+coverage/
+
+# Turbopack
+.turbo/
+
+# Lock files (worker & frontend punya masing-masing)
+# Uncomment jika tidak mau commit lock files:
+# package-lock.json

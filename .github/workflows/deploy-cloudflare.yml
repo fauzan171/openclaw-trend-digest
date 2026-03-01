@@ -1,0 +1,82 @@
+# ============================================
+# OpenClaw Trend Digest — GitHub Actions: Deploy to Cloudflare
+# Tim 5: DevOps (Cloudflare Edition)
+# ============================================
+#
+# Workflow ini:
+# 1. Deploy Worker ke Cloudflare (backend + cron + API)
+# 2. Deploy Pages ke Cloudflare (frontend)
+# ============================================
+
+name: 🚀 Deploy to Cloudflare
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: deploy
+  cancel-in-progress: true
+
+jobs:
+  # ===== Job 1: Deploy Worker (Backend) =====
+  deploy-worker:
+    name: ☁️ Deploy Worker
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: 📥 Checkout
+        uses: actions/checkout@v4
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: 📦 Install Worker Dependencies
+        working-directory: ./worker
+        run: npm ci
+
+      - name: 🔍 TypeScript Check
+        working-directory: ./worker
+        run: npx tsc --noEmit
+
+      - name: 🚀 Deploy Worker
+        working-directory: ./worker
+        run: npx wrangler deploy
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+
+  # ===== Job 2: Deploy Pages (Frontend) =====
+  deploy-frontend:
+    name: 🎨 Deploy Pages
+    runs-on: ubuntu-latest
+    needs: deploy-worker
+    timeout-minutes: 10
+
+    steps:
+      - name: 📥 Checkout
+        uses: actions/checkout@v4
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: 📦 Install Frontend Dependencies
+        working-directory: ./frontend
+        run: npm ci
+
+      - name: 🔨 Build Next.js
+        working-directory: ./frontend
+        run: npx next build
+        env:
+          NEXT_PUBLIC_API_URL: ${{ vars.WORKER_URL }}
+
+      - name: 🚀 Deploy to Cloudflare Pages
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          command: pages deploy frontend/out --project-name=openclaw-digest

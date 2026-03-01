@@ -1,0 +1,23 @@
+{
+  "name": "openclaw-trend-digest-worker",
+  "version": "1.0.0",
+  "description": "Cloudflare Worker — AI-Powered Tech & News Curator",
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "db:create": "wrangler d1 create openclaw-digest-db",
+    "db:migrate": "wrangler d1 execute openclaw-digest-db --file=./schema.sql",
+    "db:migrate:local": "wrangler d1 execute openclaw-digest-db --local --file=./schema.sql",
+    "tail": "wrangler tail",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20250224.0",
+    "typescript": "^5.9.3",
+    "vitest": "^4.0.18",
+    "wrangler": "^4.10.0"
+  }
+}
